@@ -42,15 +42,25 @@ def getSimilarMoviesToTopMovie(movie_id):
 def getPastPopularMovies():
     response=requests.get("http://127.0.0.1:5000/getAllPastTopMovies")
     movies = []
+    pastTopTen =[]
     movies.append(response.json())
-    return movies[0]
+    for idx, x in enumerate(movies[0]):
+        if idx >=10 and idx <=19:
+            pastTopTen.append(movies[0][idx])
+    pastTopTen.reverse()
+    return pastTopTen
 
 @app.route('/getAllPastTrendingMovies', methods=['GET'])
 def getPastTrendingMovies():
     response=requests.get("http://127.0.0.1:5000/getAllPastTrendingMovies")
     movies = []
+    pastTopTen =[]
     movies.append(response.json())
-    return movies[0]
+    for idx, x in enumerate(movies[0]):
+        if idx >=10 and idx <=19:
+            pastTopTen.append(movies[0][idx])
+    pastTopTen.reverse()
+    return pastTopTen
 
 @app.route('/MoviesInTrendingAndPopular', methods=['GET'])
 def getMoviesInBoth():
