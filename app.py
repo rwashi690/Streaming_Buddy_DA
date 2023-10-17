@@ -5,18 +5,14 @@ from flask_cors import CORS
 
 CORS(app)
 
-@app.route('/hello', methods=['GET'])
-def get_time():
+@app.route('/', methods=['GET'])
+def hello():
     # Returning an api for showing in  reactjs
-    return {
-        'Name':"geek",
-        "Age":"22",
-        "programming":"python"
-        }
+    return "hello, you have reached a non-functional page"
 
 @app.route('/topTenMoviesNow', methods=['GET'])
 def getTopTenMovies():
-    response=requests.get("http://127.0.0.1:5000/getTopMoviesNow")
+    response=requests.get("https://streamingbuddy-dc-de0bc7def248.herokuapp.com/getTopMoviesNow")
     movies =[]
     for x in range (0,10):
         movies.append(response.json()[x])
@@ -24,7 +20,7 @@ def getTopTenMovies():
 
 @app.route('/topTenTrendingMoviesNow', methods=['GET'])
 def getTopTenTrendingMovies():
-    response=requests.get("http://127.0.0.1:5000/getTopTrendingMoviesNow")
+    response=requests.get("https://streamingbuddy-dc-de0bc7def248.herokuapp.com/getTopTrendingMoviesNow")
     movies =[]
     for x in range (0,10):
         movies.append(response.json()[x])
@@ -40,7 +36,7 @@ def getSimilarMoviesToTopMovie(movie_id):
 
 @app.route('/getAllPastMovies', methods=['GET'])
 def getPastPopularMovies():
-    response=requests.get("http://127.0.0.1:5000/getAllPastTopMovies")
+    response=requests.get("https://streamingbuddy-dc-de0bc7def248.herokuapp.com/getAllPastTopMovies")
     movies = []
     pastTopTen =[]
     movies.append(response.json())
@@ -52,7 +48,7 @@ def getPastPopularMovies():
 
 @app.route('/getAllPastTrendingMovies', methods=['GET'])
 def getPastTrendingMovies():
-    response=requests.get("http://127.0.0.1:5000/getAllPastTrendingMovies")
+    response=requests.get("https://streamingbuddy-dc-de0bc7def248.herokuapp.com/getAllPastTrendingMovies")
     movies = []
     pastTopTen =[]
     movies.append(response.json())
@@ -87,4 +83,4 @@ def getMoviesInBoth():
 
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=5001,debug=True, use_reloader=False)
+    app.run(debug=True, use_reloader=False)
